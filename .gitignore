@@ -33,3 +33,6 @@ frontend/.env.local
 *.sln
 *.sw?
 .DS_Store
+
+# R&D documents
+R&D/
