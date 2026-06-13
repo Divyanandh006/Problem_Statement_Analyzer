@@ -1,0 +1,320 @@
+/* PSAdvisor — Global Design System */
+/* Fonts loaded via <link> in index.html */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ── Dark Theme (default) ──────────────────────────────────────── */
+:root,
+.dark {
+  --bg-primary: #0A0A0F;
+  --bg-surface: #111118;
+  --bg-elevated: #1A1A24;
+  --bg-overlay: #22222E;
+  --border: #2A2A38;
+  --border-subtle: #1E1E2A;
+  --text-primary: #F0F0FF;
+  --text-secondary: #9090A8;
+  --text-muted: #5A5A70;
+  --accent-primary: #7C6DFA;
+  --accent-secondary: #5B6AF0;
+  --accent-glow: rgba(124, 109, 250, 0.15);
+  --success: #34C78A;
+  --warning: #F5A623;
+  --danger: #FF5A5A;
+}
+
+/* ── Light Theme ───────────────────────────────────────────────── */
+.light {
+  --bg-primary: #F8F8FC;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F0F0F8;
+  --bg-overlay: #E8E8F4;
+  --border: #E0E0EC;
+  --border-subtle: #EBEBF5;
+  --text-primary: #0A0A1A;
+  --text-secondary: #50507A;
+  --text-muted: #9090B0;
+  --accent-primary: #6055E8;
+  --accent-secondary: #4A45D8;
+  --accent-glow: rgba(96, 85, 232, 0.15);
+  --success: #22A670;
+  --warning: #E09000;
+  --danger: #E04040;
+}
+
+/* ── Base Styles ───────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Custom Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ── Selection ─────────────────────────────────────────────────── */
+::selection {
+  background: rgba(124, 109, 250, 0.3);
+  color: var(--text-primary);
+}
+
+/* ── Focus Visible ─────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Component Classes ─────────────────────────────────────────── */
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5
+           bg-[var(--accent-primary)] text-white font-medium text-sm
+           rounded-btn transition-all duration-200
+           hover:scale-[1.02] hover:shadow-glow
+           active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed
+           disabled:hover:scale-100 disabled:hover:shadow-none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5
+           bg-[var(--bg-elevated)] text-[var(--text-primary)] font-medium text-sm
+           rounded-btn border border-[var(--border)] transition-all duration-200
+           hover:bg-[var(--bg-overlay)] hover:border-[var(--accent-primary)]
+           active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2
+           text-[var(--text-secondary)] font-medium text-sm
+           rounded-btn transition-all duration-200
+           hover:bg-[var(--bg-elevated)] hover:text-[var(--text-primary)]
+           active:scale-[0.98];
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-[var(--bg-surface)] border border-[var(--border)]
+           rounded-card p-6 shadow-card;
+  }
+
+  /* Input */
+  .input {
+    @apply w-full bg-[var(--bg-elevated)] border border-[var(--border)]
+           text-[var(--text-primary)] placeholder-[var(--text-muted)]
+           rounded-input px-4 py-3 text-sm outline-none
+           transition-all duration-200
+           focus:border-[var(--accent-primary)] focus:ring-1
+           focus:ring-[var(--accent-primary)];
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-success { @apply bg-green-950 text-green-400 border border-green-800; }
+  .badge-warning { @apply bg-amber-950 text-amber-400 border border-amber-800; }
+  .badge-danger  { @apply bg-red-950 text-red-400 border border-red-800; }
+
+  /* Spinner */
+  .spinner {
+    @apply inline-block rounded-full border-2 border-[var(--border)]
+           border-t-[var(--accent-primary)] animate-spin;
+  }
+
+  /* Sidebar item */
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-btn
+           text-[var(--text-secondary)] text-sm font-medium
+           transition-all duration-150 cursor-pointer
+           hover:bg-[var(--bg-elevated)] hover:text-[var(--text-primary)];
+  }
+  .sidebar-item.active {
+    @apply bg-[var(--bg-elevated)] text-[var(--text-primary)]
+           border border-[var(--border)];
+  }
+}
+
+/* ── Markdown Render Styles ────────────────────────────────────── */
+.prose-psadvisor {
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.prose-psadvisor h1,
+.prose-psadvisor h2,
+.prose-psadvisor h3,
+.prose-psadvisor h4 {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: 1.4em;
+  margin-bottom: 0.6em;
+}
+
+.prose-psadvisor h2 { font-size: 1.2em; }
+.prose-psadvisor h3 { font-size: 1.05em; color: var(--accent-primary); }
+
+.prose-psadvisor p { margin-bottom: 0.9em; }
+
+.prose-psadvisor ul,
+.prose-psadvisor ol {
+  padding-left: 1.5em;
+  margin-bottom: 0.9em;
+}
+
+.prose-psadvisor li { margin-bottom: 0.3em; }
+
+.prose-psadvisor strong { color: var(--text-primary); font-weight: 600; }
+
+.prose-psadvisor em { color: var(--text-secondary); }
+
+.prose-psadvisor code {
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  color: var(--accent-primary);
+}
+
+.prose-psadvisor pre {
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1em;
+  overflow-x: auto;
+  margin-bottom: 1em;
+}
+
+.prose-psadvisor pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-primary);
+}
+
+.prose-psadvisor table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+
+.prose-psadvisor th {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: left;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prose-psadvisor td {
+  padding: 10px 12px;
+  border: 1px solid var(--border-subtle);
+  vertical-align: top;
+}
+
+.prose-psadvisor tr:hover td {
+  background: var(--bg-elevated);
+}
+
+.prose-psadvisor blockquote {
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 1em;
+  color: var(--text-secondary);
+  margin: 1em 0;
+}
+
+.prose-psadvisor hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5em 0;
+}
+
+/* ── Landing page animated background ─────────────────────────── */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ── Streaming cursor blink ────────────────────────────────────── */
+.streaming-cursor::after {
+  content: '▋';
+  display: inline-block;
+  color: var(--accent-primary);
+  animation: blink 0.8s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Stagger animation for ranking rows ────────────────────────── */
+@keyframes slideInRow {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.rank-row {
+  animation: slideInRow 0.3s ease forwards;
+}
+
+/* ── Score bar fill animation ──────────────────────────────────── */
+@keyframes fillBar {
+  from { width: 0%; }
+  to   { width: var(--bar-width); }
+}
+
+.score-bar-fill {
+  animation: fillBar 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── Reduced motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
